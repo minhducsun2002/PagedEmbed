@@ -1,0 +1,11 @@
+{
+    "inputFiles": [
+        "./src"
+    ],
+    "mode": "file",
+    "out": "./docs",
+    "excludeNotExported": true,
+    "exclude": "./dist/**",
+    "readme": "./README.md",
+    "hideGenerator": true
+}

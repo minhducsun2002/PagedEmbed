@@ -1,0 +1,30 @@
+{
+  "name": "paged-embeds",
+  "version": "0.0.1",
+  "description": "Discord embeds pagination wrapper",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "discord",
+    "pagination",
+    "embed",
+    "richembed",
+    "messageembed",
+    "message"
+  ],
+  "author": "Minh Duc Vo <minhducsun2002@gmail.com>",
+  "license": "BSD-3-Clause",
+  "peerDependencies": {
+    "discord.js": "^12.0.2"
+  },
+  "engines": {
+    "node": ">= 10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.0",
+    "typedoc": "^0.16.11",
+    "typescript": "^3.8.3"
+  }
+}

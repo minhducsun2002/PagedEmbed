@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "allowJs": false,
+        "alwaysStrict": true,
+        "declaration": true,
+        "listEmittedFiles": true,
+        "noImplicitAny": true,
+        "outDir": "dist/",
+        "types": ["node"],
+        "target": "ES6",
+        "esModuleInterop": true
+    },
+    "files": ["src/index.ts"]
+}
