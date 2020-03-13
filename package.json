@@ -1,5 +1,5 @@
 {
-  "name": "paged-embeds",
+  "name": "@minhducsun2002/paged-embeds",
   "version": "0.0.1",
   "description": "Discord embeds pagination wrapper",
   "main": "dist/index.js",
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@types/node": "^13.9.0",
+    "@types/ws": "^7.2.2",
     "typedoc": "^0.16.11",
     "typescript": "^3.8.3"
   }
