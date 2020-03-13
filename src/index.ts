@@ -5,6 +5,8 @@ type ReactionHandler =
     (m : MessageReaction, i : number, u : User, e : MessageEmbed[], c : ReturnType<Message['createReactionCollector']>) => 
         { index?: number, embed?: MessageEmbed[] }
 
+const deURIfy = (s : string) => decodeURIComponent(s);
+
 export class PagedEmbeds extends EventEmitter {
     private _embeds : MessageEmbed[] = []
     private _msg: Message
@@ -29,12 +31,12 @@ export class PagedEmbeds extends EventEmitter {
     }
 
     public addHandler(e : Emoji | String, h : ReactionHandler) {
-        this._hooks.set(e.toString(), [e, h]);
+        this._hooks.set(deURIfy(e.toString()), [e, h]);
         return this;
     }
 
     public removeHandler(e : Emoji) {
-        this._hooks.delete(e.toString());
+        this._hooks.delete(deURIfy(e.toString()));
         return this;
     }
 
@@ -50,11 +52,11 @@ export class PagedEmbeds extends EventEmitter {
         if (!this._channel) throw new Error(`A channel must be set!`)
         this._msg = await this._channel.send(content, this._embeds[this._currentIndex]);
         let collector = this._msg.createReactionCollector(
-            (r : MessageReaction) => this._hooks.has(r.emoji.toString()),
+            (r : MessageReaction) => this._hooks.has(deURIfy(r.emoji.toString())),
             opts
         );
         collector.on('collect', (r, u) => {
-            let { index, embed } = this._hooks.get(r.emoji.toString())[1](
+            let { index, embed } = this._hooks.get(deURIfy(r.emoji.toString()))[1](
                 r, this._currentIndex, u, this._embeds, collector
             )
             if (!embed) embed = this._embeds;
