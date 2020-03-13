@@ -4,7 +4,8 @@
   "description": "Discord embeds pagination wrapper",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "npm run build",
+    "build": "tsc"
   },
   "keywords": [
     "discord",
