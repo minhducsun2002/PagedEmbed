@@ -19,11 +19,6 @@ export class PagedEmbeds extends EventEmitter {
 
     public setEmbeds(m : MessageEmbed[]) {
         if (!Array.isArray(m)) throw new TypeError(`Argument to setEmbeds must be an array of MessageEmbeds!`)
-        if (m.length) {
-            for (let i of m)
-                if (!(i instanceof MessageEmbed)) 
-                throw new TypeError(`Array must consist of MessageEmbeds!`)
-        }
         this._embeds = m
         return this;
     }
@@ -34,13 +29,11 @@ export class PagedEmbeds extends EventEmitter {
     }
 
     public addHandler(e : Emoji, h : ReactionHandler) {
-        if (!(e instanceof Emoji)) throw new TypeError(`First argument to addHandler must be an Emoji!`)
         this._hooks.set(e.toString(), [e, h]);
         return this;
     }
 
     public removeHandler(e : Emoji, h : ReactionHandler) {
-        if (!(e instanceof Emoji)) throw new TypeError(`Argument to removeHandler must be an Emoji!`)
         this._hooks.delete(e.toString());
         return this;
     }
