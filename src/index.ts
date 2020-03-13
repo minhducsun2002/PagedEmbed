@@ -29,8 +29,6 @@ export class PagedEmbeds extends EventEmitter {
     }
 
     public setChannel(c: Message['channel']) {
-        if (!(c instanceof TextChannel) && !(c instanceof DMChannel)) 
-            throw new TypeError(`Argument to setChannel must be a Channel!`)
         this._channel = c;
         return this;
     }
