@@ -11,7 +11,7 @@ export class PagedEmbeds extends EventEmitter {
     private _channel: Message['channel'];
     private _filter: Parameters<Message['createReactionCollector']>[0]
     private _currentIndex = 0;
-    private _hooks = new Map<string, [Emoji, ReactionHandler]>()
+    private _hooks = new Map<string, [Emoji | String, ReactionHandler]>()
 
     constructor() {
         super();
@@ -28,12 +28,12 @@ export class PagedEmbeds extends EventEmitter {
         return this;
     }
 
-    public addHandler(e : Emoji, h : ReactionHandler) {
+    public addHandler(e : Emoji | String, h : ReactionHandler) {
         this._hooks.set(e.toString(), [e, h]);
         return this;
     }
 
-    public removeHandler(e : Emoji, h : ReactionHandler) {
+    public removeHandler(e : Emoji) {
         this._hooks.delete(e.toString());
         return this;
     }
