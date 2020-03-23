@@ -15,6 +15,11 @@
     "messageembed",
     "message"
   ],
+  "readme": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minhducsun2002/PagedEmbed"
+  },
   "author": "Minh Duc Vo <minhducsun2002@gmail.com>",
   "license": "BSD-3-Clause",
   "peerDependencies": {
