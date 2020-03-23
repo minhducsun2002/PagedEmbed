@@ -62,7 +62,10 @@ export class PagedEmbeds extends EventEmitter {
                 r, this._currentIndex, u, this._embeds, collector
             )
             if (!embed) embed = this._embeds;
-            if (!index) index = ((this._currentIndex + 1) % embed.length + embed.length) % embed.length;
+            if (!index)
+                if (typeof index !== 'number')
+                    // in case 0 is passed, still count
+                    index = ((this._currentIndex + 1) % embed.length + embed.length) % embed.length;
             this._currentIndex = index; this._embeds = embed;
             
             this._msg.edit(content, { embed: embed[index] });
