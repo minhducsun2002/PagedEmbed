@@ -71,5 +71,6 @@ export class PagedEmbeds extends EventEmitter {
             this._msg.edit(content, { embed: embed[index] });
         })
         this._hooks.forEach(([e]) => this._msg.react(e.toString()));
+        return collector;
     }
 }
