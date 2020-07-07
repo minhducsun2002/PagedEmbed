@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 import { MessageReaction, MessageEmbed, Message, User, Emoji, TextChannel, DMChannel } from 'discord.js';
 
 type ReactionHandler = 
-    (m : MessageReaction, i : number, u : User, e : MessageEmbed[], c : ReturnType<Message['createReactionCollector']>) => 
+    (i : number, e : MessageEmbed[], m : MessageReaction, c : ReturnType<Message['createReactionCollector']>, u : User) => 
         { index?: number, embed?: MessageEmbed[] }
 
 const deURIfy = (s : string) => decodeURIComponent(s);
@@ -11,7 +11,6 @@ export class PagedEmbeds extends EventEmitter {
     private _embeds : MessageEmbed[] = []
     private _msg: Message
     private _channel: Message['channel'];
-    private _filter: Parameters<Message['createReactionCollector']>[0]
     private _currentIndex = 0;
     private _hooks = new Map<string, [Emoji | String, ReactionHandler]>()
 
@@ -59,7 +58,7 @@ export class PagedEmbeds extends EventEmitter {
             if (u.id === this._msg.author.id) return;
 
             let { index, embed } = this._hooks.get(deURIfy(r.emoji.toString()))[1](
-                r, this._currentIndex, u, this._embeds, collector
+                this._currentIndex, this._embeds, r, collector, u
             )
             if (!embed) embed = this._embeds;
             if (!index)
