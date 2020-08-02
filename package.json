@@ -1,6 +1,6 @@
 {
   "name": "@minhducsun2002/paged-embeds",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Discord embeds pagination wrapper",
   "main": "dist/index.js",
   "scripts": {
