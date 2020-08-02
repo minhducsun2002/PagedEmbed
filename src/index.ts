@@ -46,15 +46,14 @@ export class PagedEmbeds extends EventEmitter {
 
     get hooks() { return this._hooks };
 
-    public async run(opts : Parameters<Message['createReactionCollector']>[1]) {
-        const content = '';
+    public async run(opts : Parameters<Message['createReactionCollector']>[1], content = '') {
         if (!this._channel) throw new Error(`A channel must be set!`)
         this._msg = await this._channel.send(content, this._embeds[this._currentIndex]);
         let collector = this._msg.createReactionCollector(
             (r : MessageReaction) => this._hooks.has(deURIfy(r.emoji.toString())),
             opts
         );
-        collector.on('collect', (r, u) => {
+        collector.on('collect', async (r, u) => {
             if (u.id === this._msg.author.id) return;
 
             let { index, embed } = this._hooks.get(deURIfy(r.emoji.toString()))[1](
@@ -67,6 +66,7 @@ export class PagedEmbeds extends EventEmitter {
                     index = ((this._currentIndex + 1) % embed.length + embed.length) % embed.length;
             this._currentIndex = index; this._embeds = embed;
             
+            let { content } = await this._msg.fetch();
             this._msg.edit(content, { embed: embed[index] });
         })
         this._hooks.forEach(([e]) => this._msg.react(e.toString()));
